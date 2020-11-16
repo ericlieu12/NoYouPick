@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "noyoupick-4aa75": {
+      "hosting": {
+        "noyoupick": [
+          "noyoupick-4aa75"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "noyoupick-4aa75"
+  }
+}

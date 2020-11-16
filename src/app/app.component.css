@@ -1,0 +1,21 @@
+.page {
+    display: flex;
+    background: #03c4a1;
+    
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif; 
+    color:white;
+    font-size: 12px; 
+    flex-direction: column;
+    justify-content: center;
+   width: 100%;
+    max-width: 700px;
+    height:120%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-left:auto;
+    margin-right:auto;
+}
+.body {
+   
+    background-color: #03c4a1;
+    min-width: 100%;
+}

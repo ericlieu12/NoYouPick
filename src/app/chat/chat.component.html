@@ -1,0 +1,355 @@
+<body>
+  
+<div class = "flex-page">
+      <!--these containers only run if user is authenticated and room is existing, else go to login 2 -->
+      <div class = "placeholder"></div>
+
+      <ng-container *ngIf="room$ | async as room">
+        <ng-container *ngIf=" auth.user$ | async as user; else login2" >
+      
+        <!-- gives u link -->
+            <!-- this will only be called if the owner presses the start button and it is not "done" -->
+            <ng-container *ngIf = "room.start && !room.done; else map">
+              <div class = "placeholder2"><div> <img class = "toplogo" src = "/assets/logohor.png"> NoYouPick! </div> </div>
+              <div id="cardsection" swing-stack  [stackConfig]="stackConfig"  #myswing1 (throwout)="onThrowOut($event, room.data.businesses.length)">
+          <div class="underground cardsflexbox" swing-card #mycards1 *ngIf="(index + 1) != room.data.businesses.length" 
+              [ngStyle]="{'background-image': getUrl(room.data.businesses[index+1].image_url), 'transform': getscale()}">
+
+                  <!-- TODO make image not have a 1px margin -->
+                  
+            <div class="restaurant-info ">
+              <img src="/assets/yelp.png" class ="yelplogo">
+            </div>
+
+            <div class="restaurant-text">
+            {{room.data.businesses[index+1].name}} ({{room.data.businesses[index+1].categories[0].title}})<br>
+            <ng-container *ngIf=" room.data.businesses[index+1].rating == 5.0 ">
+                <img src="/assets/yelp_stars/web_and_ios/small/small_5@3x.png">
+              </ng-container>
+              <ng-container *ngIf=" room.data.businesses[index+1].rating == 4.5 ">
+                <img src="/assets/yelp_stars/web_and_ios/small/small_4_half@3x.png">
+              </ng-container>
+              <ng-container *ngIf=" room.data.businesses[index+1].rating == 4.0 ">
+                <img src="/assets/yelp_stars/web_and_ios/small/small_4@3x.png">
+              </ng-container>
+              <ng-container *ngIf=" room.data.businesses[index+1].rating == 3.5 ">
+                <img src="/assets/yelp_stars/web_and_ios/small/small_3_half@3x.png">
+              </ng-container>
+              <ng-container *ngIf=" room.data.businesses[index+1].rating == 3.0 ">
+                <img src="/assets/yelp_stars/web_and_ios/small/small_3@3x.png">
+              </ng-container>
+              <ng-container *ngIf=" room.data.businesses[index+1].rating == 2.5 ">
+                <img src="/assets/yelp_stars/web_and_ios/small/small_2_half@3x.png">
+              </ng-container>
+              <ng-container *ngIf=" room.data.businesses[index+1].rating == 2.0 ">
+                <img src="/assets/yelp_stars/web_and_ios/small/small_2@3x.png">
+              </ng-container>
+              <ng-container *ngIf=" room.data.businesses[index+1].rating == 1.5 ">
+                <img src="/assets/yelp_stars/web_and_ios/small/small_1_half@3x.png">
+              </ng-container>
+              <ng-container *ngIf=" room.data.businesses[index+1].rating == 1.0 ">
+                <img src="/assets/yelp_stars/web_and_ios/small/small_1@3x.png">
+              </ng-container>
+              <ng-container *ngIf=" room.data.businesses[index+1].rating == 0 ">
+                <img src="/assets/yelp_stars/web_and_ios/small/small_0@3x.png">
+              </ng-container>
+              <span style = "font-weight:10"> {{room.data.businesses[index+1].review_count}} reviews </span>
+            </div>  
+            <!-- TODO move button row to be taller and aligned to bottom 
+            <div class="button-row" style="background-color: black">
+              <button class="btn btn-primary btn-block" (click)="changevoteyes(room.data.businesses.length);">Yes</button>
+              <button class="btn btn-primary btn-block" (click)="changevoteno(room.data.businesses.length);">No</button>
+            </div>-->
+          </div>
+
+          <ng-container *ngIf = "!isFinished && !room.done; else waitinganimation">
+            <div class="card cardsflexbox" swing-card #mycards1 *ngFor="let c of cards" [ngStyle]="{'background-image': getUrl(room.data.businesses[c].image_url)}" (click)="showYelpInfo(room.data.businesses[c])"  [@cardAnimator]="animationState"
+                (@cardAnimator.done)="resetAnimationState($event, room.data.businesses.length)">
+
+              <div class="restaurant-info">
+                <img src="/assets/yelp.png" class ="yelplogo" (click) = "gotoYelp()">
+              </div>
+                <div class="restaurant-text">
+                {{room.data.businesses[c].name}} ({{room.data.businesses[c].categories[0].title}})
+                  <ng-container *ngIf=" room.data.businesses[index].rating == 5.0 ">
+                    <img src="/assets/yelp_stars/web_and_ios/small/small_5@3x.png">
+                  </ng-container>
+                  <ng-container *ngIf=" room.data.businesses[index].rating == 4.5 ">
+                    <img src="/assets/yelp_stars/web_and_ios/small/small_4_half@3x.png">
+                  </ng-container>
+                  <ng-container *ngIf=" room.data.businesses[index].rating == 4.0 ">
+                    <img src="/assets/yelp_stars/web_and_ios/small/small_4@3x.png">
+                  </ng-container>
+                  <ng-container *ngIf=" room.data.businesses[index].rating == 3.5 ">
+                    <img src="/assets/yelp_stars/web_and_ios/small/small_3_half@3x.png">
+                  </ng-container>
+                  <ng-container *ngIf=" room.data.businesses[index].rating == 3.0 ">
+                    <img src="/assets/yelp_stars/web_and_ios/small/small_3@3x.png">
+                  </ng-container>
+                  <ng-container *ngIf=" room.data.businesses[index].rating == 2.5 ">
+                    <img src="/assets/yelp_stars/web_and_ios/small/small_2_half@3x.png">
+                  </ng-container>
+                  <ng-container *ngIf=" room.data.businesses[index].rating == 2.0 ">
+                    <img src="/assets/yelp_stars/web_and_ios/small/small_2@3x.png">
+                  </ng-container>
+                  <ng-container *ngIf=" room.data.businesses[index].rating == 1.5 ">
+                    <img src="/assets/yelp_stars/web_and_ios/small/small_1_half@3x.png">
+                  </ng-container>
+                  <ng-container *ngIf=" room.data.businesses[index].rating == 1.0 ">
+                    <img src="/assets/yelp_stars/web_and_ios/small/small_1@3x.png">
+                  </ng-container>
+                  <ng-container *ngIf=" room.data.businesses[index].rating == 0 ">
+                    <img src="/assets/yelp_stars/web_and_ios/small/small_0@3x.png">
+                  </ng-container> <span style = "font-weight:10"> {{room.data.businesses[c].review_count}} reviews </span>
+                </div>    
+            </div>
+          </ng-container>
+        </div>
+
+        <ng-container *ngIf = "!isFinished;">
+          <div class = "buttons">
+            <div class = "left">
+              <mat-icon [inline]="true"  (click)="this.startAnimation('swipeleft');" style="font-size:min(25vw, 175px);margin-left: min(12.5vw, 87.5px)">close</mat-icon>
+            </div>
+            <div class = "right">
+              <mat-icon [inline]="true"  (click)="this.startAnimation('swiperight');" style="font-size:min(25vw, 175px);margin-right: min(12.5vw, 87.5px)">check</mat-icon>
+            </div>
+          </div>   
+        </ng-container>
+
+        <ng-template #waitinganimation>
+          <div class = "waiting">
+            <div>
+              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: #03c4a1; display: block; shape-rendering: auto;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+              <circle cx="50" cy="50" r="26" stroke-width="7" stroke="#c62a88" stroke-dasharray="40.840704496667314 40.840704496667314" fill="none" stroke-linecap="round">
+                <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1.2195121951219512s" keyTimes="0;1" values="0 50 50;360 50 50"></animateTransform>
+              </circle>
+              <!-- [ldio] generated by https://loading.io/ --></svg>
+              <p style="text-align: center"> WAITING FOR FRIENDS
+              </p>
+            </div>
+          </div>
+        </ng-template>
+
+        </ng-container>
+            <!-- if "done", displays recommended restaraunt and prompt-->
+        <ng-container *ngIf = "room.start && room.done">
+          <div class="flex-match">
+            <img src (error)="showMatch(room.recommended)">
+            <div class="text-center"><h1>IT'S A MATCH!</h1></div>
+            <div class="description text-center">
+              <p><b>{{getOtherUser(user.displayName, room.users)}} will be eating at {{room.recommended.name}}!</b></p>
+              <p> {{room.recommended.location.address1}} {{room.recommended.location.address2}} <br>{{room.recommended.location.city}},{{room.recommended.location.state}} <br>
+                Powered by <img src="/assets/yelp.png" height="15"></p>
+            </div>
+              <div class="logo-match-row">
+                <img class="match-image" src = "/assets/logohor.png">
+                <img class="match-image" src = "{{room.recommended.image_url}}">
+              </div>
+
+              <!-- margin between image and buttons-->
+            <div>
+              <div class = "flex-button">
+                <button class="match-button" (click)="showMatchInfo(room.recommended);">Show Info<br> <mat-icon>info</mat-icon></button>
+              </div>
+
+              <div class = "flex-button">
+                <button class="match-button" (click)="showMap(room.recommended);">Directions<br> <mat-icon>place</mat-icon></button>
+              </div>
+
+              <div class = "flex-button">
+                <button class="match-button" style="margin-bottom: 7.5%;" (click)="showDonate();">Donate<br> <mat-icon>attach_money</mat-icon></button>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-template #map>
+          <div *ngIf = "!room.done" class = "map">
+            <div class = "placeholder2"><div> <img class = "toplogo" src = "/assets/logohor.png"> NoYouPick! </div> </div>
+            <div class = "innermap">
+              <img [src] = "getStaticMapsUrl(room.location.lat,room.location.lng,room.radius)">
+            </div>
+          </div>
+        </ng-template>
+
+        <div class = "flexbox extend">
+          <img src (error)="copylinkalert()">
+    
+          <div class = "startsection">
+            <!-- different scenarios for if start button is valid or not. START BUTTON WILL BE ENABLED ONLY FOR GROUP OWNER AND WHEN API IS FINISHED CALLING -->
+            <ng-container *ngIf=" room.ready && user.uid == room.uid && !room.start ; else startdisable ">
+              <button class="startroombutton" (click)="startRoom();">Start Picking!</button>
+            </ng-container>
+
+            <!-- all other situations will have the button disabled -->
+            <ng-template #startdisable>
+              <ng-container *ngIf="!room.start; else placeholderxd">
+                <ng-container *ngIf="room.uid == user.uid;">
+                  <button class="startroombutton" (click)="waitingButton()"> Waiting for server <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: #c62a88; display: block; shape-rendering: auto;" width="20" height="20px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+                    <circle cx="50" cy="50" r="26" stroke-width="7" stroke="#ffffff" stroke-dasharray="40.840704496667314 40.840704496667314" fill="none" stroke-linecap="round">
+                      <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1.2195121951219512s" keyTimes="0;1" values="0 50 50;360 50 50"></animateTransform>
+                    </circle>
+                    <!-- [ldio] generated by https://loading.io/ --></svg>
+                  </button>
+                </ng-container>
+                
+                <ng-container *ngIf="room.uid != user.uid;">
+                  <button class="startroombutton" (click)="waitingButton()"> Waiting for host to start <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: #c62a88; display: block; shape-rendering: auto;" width="20" height="20px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+                    <circle cx="50" cy="50" r="26" stroke-width="7" stroke="#ffffff" stroke-dasharray="40.840704496667314 40.840704496667314" fill="none" stroke-linecap="round">
+                      <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1.2195121951219512s" keyTimes="0;1" values="0 50 50;360 50 50"></animateTransform>
+                    </circle>
+                    <!-- [ldio] generated by https://loading.io/ --></svg>
+                  </button>
+                </ng-container>
+              </ng-container>
+              <ng-template #placeholderxd>
+                <button class="startroombutton" disabled> Users</button>
+              </ng-template>
+            </ng-template> 
+            <button class="secondarybuttons" (click)="copylink();">Copy <br> <mat-icon>link</mat-icon></button>
+            <button class="secondarybuttons" (click)="copylink();">Share <br>  <mat-icon>share</mat-icon></button>
+            <button class="secondarybuttons" (click)="infoButton();">Info <br> <mat-icon>info</mat-icon></button>
+          </div>
+          
+          <!-- displays all the users in the room -->
+          <div  class = "userlist">
+            <ng-container *ngIf=" room.uid == user.uid ">
+              <div *ngFor="let people of room.users">
+                <div class = "flexboxlistitem" (click)="viewpersonowner(people.user, people.displayName);">
+                  <div class ="name">
+                    <img class = "profile" src = "/assets/logohor.png"> {{people.displayName}}
+                  </div>
+
+                  <div class = "icons">
+                    <ng-container *ngIf=" people.user == user.uid ">
+                      <div> 
+                        <mat-icon>person</mat-icon>
+                      </div>
+                    </ng-container>
+
+                    <ng-container *ngIf=" room.uid == people.user ">
+                      <div> <mat-icon>star</mat-icon> </div>
+                    </ng-container>
+
+                    <ng-container *ngIf=" people.user != user.uid &&  room.uid != people.user">
+                      <div> 
+                        <mat-icon>person_outline</mat-icon>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+
+            <ng-container *ngIf=" room.uid != user.uid ">
+              <div *ngFor="let people of room.users">
+                <div class = "flexboxlistitem" (click)="viewperson(people.user, people.displayName);">
+                  <div>
+                <img class = "profile" src = "/assets/logohor.png"> {{people.displayName}}
+              </div>
+                <div class = "icons">
+                  <ng-container *ngIf=" people.user == user.uid ">
+                    <div> 
+                      <mat-icon>person</mat-icon>
+                    </div>
+                  </ng-container>
+                  <ng-container *ngIf=" room.uid == people.user ">
+                    <div> <mat-icon>star</mat-icon> </div>
+                  </ng-container>
+                  <ng-container *ngIf=" people.user != user.uid &&  room.uid != people.user">
+                    <div> 
+                      <mat-icon>person_outline</mat-icon>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-template #login2>
+        <div class="flexbox">
+          <div class="lobby-image">
+            <img src = "/assets/logohor.png">
+          </div>    
+          <ng-container *ngIf="room.start">
+            <div class = "flex-button">
+                <button class="btn btn-lg .text-nowrap button-shorten" style="color: white; background-color: #c62a88;" (click) = "showError(0)">Room in Progress</button>
+            </div>
+          </ng-container>
+          <!-- Check to ensure room is not at maximum capacity -->
+          <ng-container *ngIf="room.users.length >= 10 && !room.start; else roomNotFull">
+            <!-- TODO make this look more appealing! -->
+            <div class = "flex-button">
+              <button class="btn btn-lg .text-nowrap button-shorten" style="color: white; background-color: #c62a88;" (click) = "showError(1)">Full Lobby</button>
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="room.users.length <= 10 && !room.start;">
+            <div class = "flex-button">
+              <button class="btn btn-lg .text-nowrap button-shorten" style="color: white; background-color: #c62a88; " (click)="showLogin();">Join Lobby</button>
+            </div>
+          </ng-container>
+        </div>
+
+        <div class = "flexboxabout">
+          <div class = "aboutimage" style="margin-top: 20px;"> 
+            <img src ="/assets/logohor.png"> 
+          </div>
+
+          <div class="flex-title-row">
+            <div class = "title"> What is NoYouPick? </div>
+          </div>
+
+          <div class = "description text-center" style="margin-bottom: 40px;"> 
+            <!-- Say you are out with the boys. You and the boys get hungry and decide that you want something to grub on. 
+              You don't necessarily mind what restaurant you want to eat at, so you graciously say to one of the boys 
+              "Hey, you can pick the restaurant. I don't mind". They were thinking the same thing and reply "No, you pick." 
+              You don't want to sound selfish. You also don't want to disappoint the group with a poor choice. You then ask 
+              another one of the boys. This repeats and repeats until noone can decide. NoYouPick solves this by providing a 
+              quick and painless process for everyone to anonymously choose their choices. Collectively choose a restaurant in 
+              less than 5 minutes! No accounts, no emails, no downloads, nothing. -->
+            Tinder, for food, places, and movies! <br> NoYouPick simply aims to solve the problem of not knowing where to eat, watch, or hangout. Whether you are with a hungry group of friends 
+            or a significant other, NoYouPick provides an easy experience for figuring it out together, Tinder style! Instead of having others say the dreaded "No, you pick", just use us!
+          </div>
+
+          <div></div>
+
+          <div class="flex-title-row">
+            <div class = "title"> How does this work? </div>
+          </div>
+                
+          <div class="flex-title-row">
+            <div style="margin-right: 6px;"> Group Leader </div>
+            <mat-icon>person</mat-icon>
+          </div>
+
+          <div class="description">
+            <ol>
+              <li>Choose your subcategory(places, movies, restaraunts)</li>
+              <li>Set your location and radius (for restaurants/places/travel) OR set your genre (for movies)</li>
+              <li>Create a room and share the link </li>
+              <li>Wait for others to join and then click start </li>
+            </ol>
+          </div>
+
+          <div class="flex-title-row">
+            <div style="margin-right: 6px;"> Users </div>
+            <mat-icon>group</mat-icon>      
+          </div>
+
+          <div class="description">
+            <ol>
+              <li>Join the host's lobby</li>
+              <li>Swipe, like Tinder!</li>
+            </ol>
+              NoYouPick will recommend you a restaurant, movie, or place based on what everyone likes!
+          </div>
+        </div>
+      </ng-template>
+    </ng-container>
+   </div>
+</body>

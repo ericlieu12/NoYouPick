@@ -1,0 +1,191 @@
+.flexbox {
+	display: flex;
+	width: 100%;
+	
+	height: 100vh;
+	
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.flex-page {
+	
+	width: 100%;
+	max-width: 700px;
+	
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	margin:auto;
+	
+}
+
+.flex-bg-blue {
+	display: flex;
+	flex-direction: column;
+	
+	justify-content: center;
+	background-color: #150485;
+	min-width: 100%;
+}
+
+.flex-bg-pink {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background-color: #c62a88;
+	min-width: 100%;
+}
+
+.flexboxabout {
+	color:white;
+	display: flex;
+	max-width:100%;
+	min-width: 100%;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
+.createroombutton {
+    width: 80%;
+    height: 60px;
+    border-radius: 20px;
+    border-style: solid;
+    margin:auto;
+    background: #03c4a1;
+   color:white;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif; 
+	font-size: 24px; 
+	font-style: normal; 
+	font-variant: normal; 
+	font-weight: bold; 
+    }
+
+.logobox {
+	font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif; 
+	font-size: 20px; 
+	font-style: normal; 
+	font-variant: normal; 
+	font-weight: bold; 
+	height:7vh;
+	margin-left:auto;
+	margin-right: auto;
+	color: white;
+}
+.logo {
+	height:7vh;
+	width:auto;
+}
+
+.buttonmargin {
+	min-width: 10%;
+}
+.button {
+	height: 60px;
+display: flex;
+flex-direction: row;
+	width: 100%;
+}
+
+.description {
+	font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif; 
+	font-size: 18px; 
+	 
+	font-variant: normal; 
+	font-weight: lighter; 
+	line-height: 26px;
+	color: white;
+	margin: 8px;
+}
+
+.map {
+margin-left:auto;
+margin-right:auto;
+
+}
+.maptitle {
+	font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif; 
+	font-size: 24px; 
+	font-style: italic; 
+	font-variant: normal; 
+	font-weight: 400; 
+	height:100px;
+	color: white;
+	width:80%;
+	margin:auto;
+	text-align: center;
+	
+}
+
+.mapflex {
+	display:flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 80%;
+	color:white;
+	max-width: 560px !important;
+	margin-left:auto;
+	margin-right: auto;
+	text-align: center;
+}
+agm-map {
+  height: 50vh;
+  width:100%;
+  
+}
+@media screen and (max-width: 500px) {
+  .flexbox {
+    height: -webkit-fill-available; 
+  }
+  agm-map {
+  height: 300px;
+  width:100%;
+  
+}
+}
+.title {
+	font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif; 
+	font-size: 20px; 
+	font-style: bold; 
+	font-variant: normal; 
+	font-weight: 400; 
+	line-height: 20px;
+	color: white;
+	text-align:center;
+	
+}
+
+.megaflex {
+	width: 100%;
+	z-index:0;
+	display: flex;
+	flex-direction: column;
+}
+
+mat-slider {
+	width:100%;
+}
+
+.aboutimage {
+	height:100px;
+	width: 100px;
+	margin:auto;
+	
+}
+body {
+	max-width: 100vw;
+	margin:auto;
+}
+
+.flex-title-row {
+	display:flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+
+}
+
+.text-center {
+	text-align: center;
+}
+

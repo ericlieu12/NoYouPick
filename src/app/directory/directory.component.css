@@ -1,0 +1,160 @@
+.page {
+    display: flex;
+    background: #150485;
+    height:100vh;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif; 
+    font-size: 12px; 
+    flex-direction: column;
+    justify-content: space-around;
+   width: 100%;
+    max-width: 700px;
+    
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-left:auto;
+    margin-right:auto;
+}
+.logobox {
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif; 
+    font-size: 20px; 
+    font-style: normal; 
+    font-variant: normal; 
+    font-weight: bold; 
+    height:7vh;
+    margin-left:auto;
+    margin-right: auto;
+    color: white;
+}
+.logo {
+    height:7vh;
+    width:auto;
+}
+
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    height:1500px;
+    justify-content: flex-start;
+    background-color: #150485;
+    min-width: 100%;
+}
+.flex-page {
+    
+    width: 100%;
+    max-width: 700px;
+    flex: 1;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin:auto;
+    
+}
+
+.flex-bg-blue {
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: center;
+    background-color: #150485;
+    min-width: 100%;
+}
+
+.flex-bg-pink {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #c62a88;
+    min-width: 100%;
+    flex: 1;
+}
+.flex-title-row {
+    display:flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+
+}
+.flexboxabout {
+    color:white;
+    display: flex;
+   width: 100%;
+    
+    flex-direction: column;
+    
+}
+.text-center {
+    text-align: center;
+}
+.aboutimage {
+    height:100px;
+    width: 100px;
+    margin:auto;
+    
+}
+.description {
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif; 
+    font-size: 18px; 
+     
+    font-variant: normal; 
+    font-weight: lighter; 
+    line-height: 26px;
+    color: white;
+    margin: 8px;
+}
+.header-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif; 
+    font-size: 24px; 
+    font-style: italic; 
+    font-variant: normal; 
+    font-weight: 400; 
+    
+    color: white;
+    
+    
+    text-align: center;
+}
+.maptitle {
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif; 
+    font-size: 24px; 
+    font-style: italic; 
+    font-variant: normal; 
+    font-weight: 400; 
+    height:100px;
+    color: white;
+    
+    
+    text-align: center;
+    
+}
+
+
+.category-button {
+   margin: auto;
+  
+    width: 80%;
+    height: 60px;
+    background-color: #03c4a1;
+   
+    border-radius: 20px;
+    border-style: solid;
+    background: #03c4a1;
+   color:white;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif; 
+    font-size: 24px; 
+    font-style: normal; 
+    font-variant: normal; 
+    font-weight: bold; 
+}
+
+.button-image {
+    height: 10vw;
+    width: 10vw;
+}
+
