@@ -23,7 +23,8 @@ exports.createRoom = functions.firestore
         //if they can't choose from 30 restaurants, i give up
               },
     headers:  {
-    Authorization: "Bearer 
+    Authorization: "Bearer"
+    },
     })
     .then(response => {
         return admin.firestore().doc('restaurants/' +  docID).set({
@@ -107,7 +108,7 @@ exports.createRoomPlaces = functions.firestore
          limit: 30,
       },
       headers:  {
-        Authorization: ""
+        Authorization: "Bearer "
       },
     })
       .then(response => {
@@ -201,7 +202,7 @@ return
          limit: 30,
       },
       headers:  {
-        Authorization: ""
+        Authorization: "Bearer "
       },
     })
       .then(response => {

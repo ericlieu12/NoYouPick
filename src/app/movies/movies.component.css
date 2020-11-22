@@ -1,15 +1,16 @@
-body {
+.body {
     width: 100%;
-    height:250%;
+    display: flex;
+    flex-direction: column;
+    
     background-color: #03c4a1;
     
 }
 
 
-
 .flex-page {
-    
-    max-width: 700px;
+   
+    width: min(100%, 700px);
     margin:auto;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     
@@ -335,22 +336,32 @@ color:white;
     width: 100%;
     height:55vh;
 }
-
 .innermap {
-    font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif; 
-    font-size: 28px; 
-  height: 35vh;
-  width:85%;
-  background-color: #ffffff;
+    height: 35vh;
+    width: 100%;
+      background-color: #ffffff;
   margin-left:auto;
   margin-right:auto;
   display: flex;
   justify-content: space-around;
   flex-direction: column;
   color:black;
+   font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif; 
+    font-size: 28px; 
 }
+
+@media screen and (max-width: 700px) {
+    .innermap {
+        height: 35vh;
+        width: 85%;
+        margin-left: 7.5%;
+        margin-right: 7.5%
+    }
+}
+
 .netflixlogo {
     height:25vh;
+    width:100%;
 }
 agm-map {
     height:100%;

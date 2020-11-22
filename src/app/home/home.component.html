@@ -1,6 +1,6 @@
 <body>
-  <div class = "megaflex">
-    <div class="flex-bg-blue">
+  <div class = "body">
+    <div class="flex-item-top">
       <div class="flex-page">
         <!-- if log in, there is error, so refresh -->
         <div *ngIf=" auth.user$ | async as user; else login">
@@ -9,7 +9,7 @@
 
         <ng-template #login>
           <!-- title -->
-          <div class = "flexbox" >
+          <div class = "startpage" >
             <div class ="logobox"> <img class="logo" src ="/assets/logohor.png">  NoYouPick!
               <img src (error) = "showInstructions()">
             </div>
@@ -18,7 +18,7 @@
               Welcome! Get started below! <br> <mat-icon (click) = 'showInstructions()'> info </mat-icon> 
             </div>
 
-            <div class = "mapflex">
+           
               <div class = "map">
                 <agm-map 
                   [latitude]="lat"
@@ -46,22 +46,25 @@
                       >
                   </agm-marker>
                 </agm-map>  
-                <mat-slider (change)="radiusChange($event)" min="1609" max="8047" step="10" [value]="circles[0].radius"></mat-slider>
+                </div>
+                <div class = "slider">
+                <mat-slider (change)="radiusChange($event)" min="1609" max="8047" step="10" [value]="circles[0].radius"></mat-slider> <br>
                {{circles[0].radiusmiles}} miles around marker!
-              </div>
-            </div> 
+             </div>
+              
+          
 
             <!-- click to login -->
-            <div class = "button">
-              <div class="buttonmargin"> </div> <button class = "createroombutton" (click)="createRoomAlert();">Create Room</button>
-              <div class="buttonmargin"></div>
-            </div>
+           
+              <button style ="background-color: transparent; border-width:0px;"> <div class = "createroombutton" (click)="createRoomAlert();"><div>Create Room</div></div>
+              </button>
+           
           </div>
         </ng-template>
       </div>
     </div>
 
-    <div class = "flex-bg-pink">
+    <div class = "flex-item-bot">
         <div class = "flex-page">
 <div class = "flexboxabout">
           <div style = "width:100px; display:flex; align-self: center"> <img class = "aboutimage" src ="/assets/logohor.png"> </div>
